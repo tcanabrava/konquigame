@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8jp8db3fqhwj"]
+
+[ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://assets/Backgrounds/QuantumTunnel.jpg" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://cxjq1j6bfd21v" path="res://scenes/konqui_2d.tscn" id="2_twpsu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twpsu"]
+size = Vector2(1178.5, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="QuantumTunnel" type="Sprite2D" parent="."]
+position = Vector2(565, 338.5)
+scale = Vector2(0.73375, 0.75666666)
+texture = ExtResource("1_pq8q7")
+
+[node name="Konqui2D" parent="." instance=ExtResource("2_twpsu")]
+position = Vector2(86, 333)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(567.75, 591)
+shape = SubResource("RectangleShape2D_twpsu")
