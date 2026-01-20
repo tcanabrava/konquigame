@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxsxpyqrtlsma"
-path="res://.godot/imported/konqui_andando.jpg-67e512bf591ee2507709d5b4fcf56b09.ctex"
+uid="uid://c2cy6l24uf0vr"
+path="res://.godot/imported/run_2.png-1e5d14f10d03acfe8f22171888d60fe4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/konqui/konqui_andando.jpg"
-dest_files=["res://.godot/imported/konqui_andando.jpg-67e512bf591ee2507709d5b4fcf56b09.ctex"]
+source_file="res://assets/konqui/run/run_2.png"
+dest_files=["res://.godot/imported/run_2.png-1e5d14f10d03acfe8f22171888d60fe4.ctex"]
 
 [params]
 

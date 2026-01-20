@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b84hgjk6pfxgj"
-path="res://.godot/imported/Ilustração51.jpg-11d1aeda70f7dfb5d71772ed10b6fdc3.ctex"
+uid="uid://cbhoou75kn8e2"
+path="res://.godot/imported/jump_3.png-bd1ba9e0e7b13946ccc52248a3f553ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/konqui/Ilustração51.jpg"
-dest_files=["res://.godot/imported/Ilustração51.jpg-11d1aeda70f7dfb5d71772ed10b6fdc3.ctex"]
+source_file="res://assets/konqui/jump/jump_3.png"
+dest_files=["res://.godot/imported/jump_3.png-bd1ba9e0e7b13946ccc52248a3f553ad.ctex"]
 
 [params]
 

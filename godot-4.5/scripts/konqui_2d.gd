@@ -10,8 +10,8 @@ var WALKING_SPEED: float = 300.0
 var RUNNING_SPEED: float = 200.0
 
 func calc_horizontal_velocity(delta: float) -> float:
-	var input_direction: float = Input.get_axis("ui_left", "ui_right")
-	var is_running: bool = Input.is_action_pressed("Run")
+	var input_direction: float = Input.get_axis("left", "right")
+	var is_running: bool = Input.is_action_pressed("run")
 
 	if not is_on_floor():
 		return velocity.x
@@ -33,18 +33,18 @@ func apply_animation() -> void:
 		sprite.flip_h = velocity.x < 0
 
 	if  not is_on_floor():
-		if Input.is_action_pressed("ui_up"): # Jump just started
-			sprite.play("Jump")
-			return
+		if Input.is_action_pressed("jump"): # Jump just started
+			sprite.play("jump")
+		return
 
 	if abs(velocity.x) > WALKING_SPEED:
-		if sprite.animation != "Run":
-			sprite.play("Run")
+		if sprite.animation != "run":
+			sprite.play("run")
 		return
 
 	if abs(velocity.x) > 0.0:
-		if sprite.animation != "Walk":
-			sprite.play("Walk")	
+		if sprite.animation != "walk":
+			sprite.play("walk")	
 		return
 
 	if is_zero_approx(velocity.x):
@@ -53,7 +53,7 @@ func apply_animation() -> void:
 	return
 
 func _physics_process(delta: float) -> void:
-	var is_jumping: bool = Input.is_action_just_pressed("ui_up")
+	var is_jumping: bool = Input.is_action_just_pressed("jump")
 	
 	if is_on_floor() and is_jumping:
 		velocity.y = -JUMP_STRENGTH
