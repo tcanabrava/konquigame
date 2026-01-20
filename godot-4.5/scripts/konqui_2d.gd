@@ -31,7 +31,11 @@ func calc_horizontal_velocity(delta: float) -> float:
 
 func apply_animation() -> void:
 	if LIFE == 0:
+		if sprite.animation == "death":
+			return
 		sprite.play("death")
+		return
+	
 	if not is_zero_approx(velocity.x):
 		sprite.flip_h = velocity.x < 0
 
