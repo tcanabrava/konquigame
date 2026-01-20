@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cxjq1j6bfd21v"]
+[gd_scene load_steps=39 format=3 uid="uid://cxjq1j6bfd21v"]
 
 [ext_resource type="Script" uid="uid://cbhillsgcbweb" path="res://scripts/konqui_2d.gd" id="1_tg8qb"]
 [ext_resource type="Texture2D" uid="uid://byldfgajh3vw8" path="res://assets/konqui/attack/attack_1.png" id="2_5sbnb"]
@@ -10,14 +10,18 @@
 [ext_resource type="Texture2D" uid="uid://o73ndoofii6q" path="res://assets/konqui/crouch/crouch_3.png" id="8_c7tu0"]
 [ext_resource type="Texture2D" uid="uid://tlg21qyvkwri" path="res://assets/konqui/crouch/crouch_4.png" id="9_13osh"]
 [ext_resource type="Texture2D" uid="uid://4txv3gwaselx" path="res://assets/konqui/walk/walk_1.png" id="10_cug4f"]
+[ext_resource type="Texture2D" uid="uid://ctspdw7c3jyfs" path="res://assets/konqui/death/death2.png" id="10_inar5"]
 [ext_resource type="Texture2D" uid="uid://bi4jqr1l1d3fu" path="res://assets/konqui/fall/fall_1.png" id="10_kog5j"]
 [ext_resource type="Texture2D" uid="uid://nfgfln77o7o4" path="res://assets/konqui/run/run_1.png" id="10_pccsr"]
 [ext_resource type="Texture2D" uid="uid://cabpcosk42jwf" path="res://assets/konqui/fall/fall_2.png" id="11_3syfl"]
 [ext_resource type="Texture2D" uid="uid://ulygytl6lwxu" path="res://assets/konqui/walk/walk_2.png" id="11_36g31"]
+[ext_resource type="Texture2D" uid="uid://byieuj2wou5dy" path="res://assets/konqui/death/death1.png" id="11_mgy3g"]
 [ext_resource type="Texture2D" uid="uid://c2cy6l24uf0vr" path="res://assets/konqui/run/run_2.png" id="11_v2rab"]
 [ext_resource type="Texture2D" uid="uid://ekhslyesxlll" path="res://assets/konqui/run/run_3.png" id="12_4afiw"]
 [ext_resource type="Texture2D" uid="uid://c7oel8g5o2p0" path="res://assets/konqui/fall/fall_3.png" id="12_5vr4x"]
 [ext_resource type="Texture2D" uid="uid://cp18decfarjmc" path="res://assets/konqui/walk/walk_3.png" id="12_k0426"]
+[ext_resource type="Texture2D" uid="uid://bodfmt2jrrd8p" path="res://assets/konqui/death/death4.png" id="12_o1f0v"]
+[ext_resource type="Texture2D" uid="uid://dcf853tem7fyi" path="res://assets/konqui/death/death3.png" id="13_1oag8"]
 [ext_resource type="Texture2D" uid="uid://407e5df1d04e" path="res://assets/konqui/run/run_4.png" id="13_52nc3"]
 [ext_resource type="Texture2D" uid="uid://4e08v2x368jg" path="res://assets/konqui/jump/jump_1.png" id="13_dhvex"]
 [ext_resource type="Texture2D" uid="uid://dhc3pd602u60p" path="res://assets/konqui/walk/walk_4.png" id="13_wr5ej"]
@@ -67,6 +71,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_inar5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mgy3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o1f0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_1oag8")
+}],
+"loop": true,
+"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -169,7 +190,8 @@ script = ExtResource("1_tg8qb")
 position = Vector2(-57, -126)
 scale = Vector2(0.37894738, 0.45487365)
 sprite_frames = SubResource("SpriteFrames_gaurk")
-animation = &"attack"
+animation = &"death"
+frame_progress = 0.90559167
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-55, -127)

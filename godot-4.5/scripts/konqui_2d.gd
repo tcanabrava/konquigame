@@ -8,6 +8,7 @@ var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var JUMP_STRENGTH: float = 800.0
 var WALKING_SPEED: float = 300.0
 var RUNNING_SPEED: float = 200.0
+var LIFE: int = 1
 
 func calc_horizontal_velocity(delta: float) -> float:
 	var input_direction: float = Input.get_axis("left", "right")
@@ -29,6 +30,8 @@ func calc_horizontal_velocity(delta: float) -> float:
 	return next_velocity
 
 func apply_animation() -> void:
+	if LIFE == 0:
+		sprite.play("death")
 	if not is_zero_approx(velocity.x):
 		sprite.flip_h = velocity.x < 0
 
@@ -53,6 +56,12 @@ func apply_animation() -> void:
 	return
 
 func _physics_process(delta: float) -> void:
+	var is_dying: bool = Input.is_action_just_pressed("fakedeath")
+	if is_dying:
+		LIFE=0
+		apply_animation()
+		return
+		
 	var is_jumping: bool = Input.is_action_just_pressed("jump")
 	
 	if is_on_floor() and is_jumping:
