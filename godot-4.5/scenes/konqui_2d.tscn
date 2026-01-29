@@ -195,9 +195,8 @@ size = Vector2(40, 29)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk28a"]
 size = Vector2(40, 80)
 
-[node name="Konqui2D" type="CharacterBody2D" unique_id=1425966991 node_paths=PackedStringArray("attack_timer")]
+[node name="Konqui2D" type="CharacterBody2D" unique_id=1425966991]
 script = ExtResource("1_tg8qb")
-attack_timer = NodePath("AttackTimer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=557573798]
 scale = Vector2(0.37894738, 0.45487365)

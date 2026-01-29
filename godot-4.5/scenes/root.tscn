@@ -1,23 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8jp8db3fqhwj"]
+[gd_scene format=3 uid="uid://c8jp8db3fqhwj"]
 
 [ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://assets/Backgrounds/QuantumTunnel.jpg" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://cxjq1j6bfd21v" path="res://scenes/konqui_2d.tscn" id="2_twpsu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_twpsu"]
-size = Vector2(1178.5, 20)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_twpsu"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1789921046]
 
-[node name="QuantumTunnel" type="Sprite2D" parent="."]
+[node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=11566269]
 position = Vector2(565, 338.5)
 scale = Vector2(0.73375, 0.75666666)
 texture = ExtResource("1_pq8q7")
 
-[node name="Konqui2D" parent="." instance=ExtResource("2_twpsu")]
+[node name="Konqui2D" parent="." unique_id=8103003 instance=ExtResource("2_twpsu")]
 position = Vector2(86, 333)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1222128708]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(567.75, 591)
-shape = SubResource("RectangleShape2D_twpsu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1220195745]
+position = Vector2(533, 592)
+shape = SubResource("WorldBoundaryShape2D_twpsu")

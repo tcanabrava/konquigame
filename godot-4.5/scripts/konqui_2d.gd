@@ -2,10 +2,12 @@ extends CharacterBody2D
 
 class_name Konqui2D
 
+const STRAIGTH_FIRE = preload("uid://buku7o8cfxuma")
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var crouch_shape: CollisionShape2D = $CrouchShape
 @onready var normal_shape: CollisionShape2D = $NormalShape
-@export var attack_timer: Timer
+@onready var attack_timer: Timer = $AttackTimer
 
 const JUMP_STRENGTH: float = 400.0
 const WALKING_SPEED: float = 300.0
@@ -18,6 +20,9 @@ var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
 var m_flip_sprite: bool = false
 var m_triggered_attack: bool = false
+
+var current_equipment = null
+var current_software = null
 
 func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
@@ -138,6 +143,11 @@ func handle_attack():
 
 	m_triggered_attack = true
 	attack_timer.start()
+
+	var fireball_direction = -1 if sprite.flip_h else 1
+	var fire: StraigthFire = STRAIGTH_FIRE.instantiate()
+	fire.set_spawn_point(global_position, fireball_direction)
+	get_parent().add_child(fire)
 
 func _physics_process(delta: float) -> void:
 	if handle_death():
