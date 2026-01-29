@@ -49,10 +49,19 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_0mqui")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": ExtResource("5_3p5hh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0mqui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g6juh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5sbnb")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 8.0
 }, {
@@ -180,16 +189,29 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk28a"]
-size = Vector2(39, 79.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inar5"]
+size = Vector2(40, 29)
 
-[node name="Konqui2D" type="CharacterBody2D" unique_id=1425966991]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk28a"]
+size = Vector2(40, 80)
+
+[node name="Konqui2D" type="CharacterBody2D" unique_id=1425966991 node_paths=PackedStringArray("attack_timer")]
 script = ExtResource("1_tg8qb")
+attack_timer = NodePath("AttackTimer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=557573798]
 scale = Vector2(0.37894738, 0.45487365)
 sprite_frames = SubResource("SpriteFrames_gaurk")
-animation = &"crouch"
+animation = &"attack"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2110909668]
+[node name="CrouchShape" type="CollisionShape2D" parent="." unique_id=288772359]
+position = Vector2(-3, 30.5)
+shape = SubResource("RectangleShape2D_inar5")
+
+[node name="NormalShape" type="CollisionShape2D" parent="." unique_id=2110909668]
+position = Vector2(-3, 5)
 shape = SubResource("RectangleShape2D_vk28a")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=322032607]
+wait_time = 0.5
+one_shot = true

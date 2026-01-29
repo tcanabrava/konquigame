@@ -3,6 +3,9 @@ extends CharacterBody2D
 class_name Konqui2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var crouch_shape: CollisionShape2D = $CrouchShape
+@onready var normal_shape: CollisionShape2D = $NormalShape
+@export var attack_timer: Timer
 
 const JUMP_STRENGTH: float = 400.0
 const WALKING_SPEED: float = 300.0
@@ -15,19 +18,21 @@ var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
 var m_flip_sprite: bool = false
 
-func calc_horizontal_velocity(delta: float) -> float:
+func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
-		return velocity.x
+		return
 
 	if m_is_crouched:
-		return  float(lerp(velocity.x, 0.0, 6 * delta))
+		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
+		return
 		
 	var input_direction: float = Input.get_axis("left", "right")
 	var is_running: bool = Input.is_action_pressed("run")
 	
 	if is_zero_approx(input_direction):
-		return  float(lerp(velocity.x, 0.0, 5 * delta))
-
+		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
+		return
+		
 	m_flip_sprite = input_direction < 0.0
 	
 	var next_velocity = WALKING_SPEED
@@ -37,7 +42,8 @@ func calc_horizontal_velocity(delta: float) -> float:
 	if input_direction < 0.0:
 		next_velocity *= -1;
 
-	return next_velocity
+	velocity.x = next_velocity
+	return
 
 func apply_animation() -> void:
 	if m_life == 0:
@@ -48,6 +54,12 @@ func apply_animation() -> void:
 	
 	if not is_zero_approx(velocity.x):
 		sprite.flip_h = m_flip_sprite
+
+	if not attack_timer.is_stopped():
+		if not sprite.is_playing() or sprite.animation != "attack":
+			print_debug("attacking")
+			sprite.play("attack")
+		return
 
 	if m_is_crouching:
 		sprite.stop()
@@ -111,14 +123,28 @@ func handle_crouching() -> bool:
 	if m_is_getting_up:
 		m_is_crouched = false
 
-	return true
+	crouch_shape.disabled = !m_is_crouched
+	normal_shape.disabled = m_is_crouched
 	
+	return true
+
+func handle_attack():
+	if !attack_timer.is_stopped():
+		return
+	
+	var is_attacking = Input.is_action_just_pressed("attack")
+	if !is_attacking:
+		return
+
+	attack_timer.start()
+
 func _physics_process(delta: float) -> void:
 	if handle_death():
 		return
 
 	handle_jumping(delta)
 	handle_crouching()
-	velocity.x = calc_horizontal_velocity(delta)
+	handle_attack()
+	calc_horizontal_velocity(delta)
 	apply_animation()
 	move_and_slide()
