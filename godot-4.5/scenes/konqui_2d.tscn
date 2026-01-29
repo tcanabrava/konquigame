@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cxjq1j6bfd21v"]
+[gd_scene format=3 uid="uid://cxjq1j6bfd21v"]
 
 [ext_resource type="Script" uid="uid://cbhillsgcbweb" path="res://scripts/konqui_2d.gd" id="1_tg8qb"]
 [ext_resource type="Texture2D" uid="uid://byldfgajh3vw8" path="res://assets/konqui/attack/attack_1.png" id="2_5sbnb"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dhc3pd602u60p" path="res://assets/konqui/walk/walk_4.png" id="13_wr5ej"]
 [ext_resource type="Texture2D" uid="uid://bp1boq7dqkd8w" path="res://assets/konqui/jump/jump_2.png" id="14_inar5"]
 [ext_resource type="Texture2D" uid="uid://dsyek0gv28aaa" path="res://assets/konqui/run/run_5.png" id="14_j17vg"]
+[ext_resource type="Texture2D" uid="uid://bt2keb8g05ntv" path="res://assets/konqui/death/death5.png" id="14_mgy3g"]
 [ext_resource type="Texture2D" uid="uid://dwpuukj6k8k0o" path="res://assets/konqui/walk/walk_5.png" id="14_n7ihd"]
 [ext_resource type="Texture2D" uid="uid://2xnwaul3i1vi" path="res://assets/konqui/run/run_6.png" id="15_5pxsj"]
 [ext_resource type="Texture2D" uid="uid://cbhoou75kn8e2" path="res://assets/konqui/jump/jump_3.png" id="15_mgy3g"]
@@ -35,7 +36,6 @@
 [ext_resource type="Texture2D" uid="uid://bymso84n2c1rq" path="res://assets/konqui/jump/jump_5.png" id="17_1oag8"]
 [ext_resource type="Texture2D" uid="uid://hqx3fcvoey4q" path="res://assets/konqui/run/run_8.png" id="17_kteyb"]
 [ext_resource type="Texture2D" uid="uid://bevkvlyvyx8ll" path="res://assets/konqui/run/run_9.png" id="18_kog5j"]
-[ext_resource type="Texture2D" uid="uid://cqsfpqo7jxf6l" path="res://assets/konqui/run/run_10.png" id="19_3syfl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gaurk"]
 animations = [{
@@ -69,22 +69,25 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_13osh")
 }],
-"loop": true,
+"loop": false,
 "name": &"crouch",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_mgy3g")
+}, {
+"duration": 1.0,
 "texture": ExtResource("10_inar5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_mgy3g")
+"texture": ExtResource("13_1oag8")
 }, {
 "duration": 1.0,
 "texture": ExtResource("12_o1f0v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_1oag8")
+"texture": ExtResource("14_mgy3g")
 }],
 "loop": false,
 "name": &"death",
@@ -151,9 +154,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("18_kog5j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_3syfl")
 }],
 "loop": true,
 "name": &"run",
@@ -181,17 +181,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk28a"]
-size = Vector2(107, 253)
+size = Vector2(39, 79.5)
 
-[node name="Konqui2D" type="CharacterBody2D"]
+[node name="Konqui2D" type="CharacterBody2D" unique_id=1425966991]
 script = ExtResource("1_tg8qb")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-57, -126)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=557573798]
 scale = Vector2(0.37894738, 0.45487365)
 sprite_frames = SubResource("SpriteFrames_gaurk")
-animation = &"death"
+animation = &"crouch"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-55, -127)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2110909668]
 shape = SubResource("RectangleShape2D_vk28a")
