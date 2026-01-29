@@ -17,6 +17,7 @@ var m_is_crouching: bool = false
 var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
 var m_flip_sprite: bool = false
+var m_triggered_attack: bool = false
 
 func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
@@ -55,10 +56,9 @@ func apply_animation() -> void:
 	if not is_zero_approx(velocity.x):
 		sprite.flip_h = m_flip_sprite
 
-	if not attack_timer.is_stopped():
-		if not sprite.is_playing() or sprite.animation != "attack":
-			print_debug("attacking")
-			sprite.play("attack")
+	if m_triggered_attack:
+		sprite.play("attack")
+		m_triggered_attack = false
 		return
 
 	if m_is_crouching:
@@ -136,6 +136,7 @@ func handle_attack():
 	if !is_attacking:
 		return
 
+	m_triggered_attack = true
 	attack_timer.start()
 
 func _physics_process(delta: float) -> void:
