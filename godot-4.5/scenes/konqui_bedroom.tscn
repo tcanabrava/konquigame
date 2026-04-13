@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bq5byqwwng74y"]
+
+[ext_resource type="Texture2D" uid="uid://dct6ejl80lqcf" path="res://original_assets/wall_elements/Flat Center Wall.png" id="1_6xaoj"]
+[ext_resource type="Texture2D" uid="uid://cq4a85xdx2s12" path="res://original_assets/floors/Cyber Floor Center Tile.png" id="1_qjjge"]
+[ext_resource type="Texture2D" uid="uid://bu2hntx48rmpy" path="res://original_assets/beds/Cyberpunk Bed Asset.png" id="2_p017x"]
+[ext_resource type="Texture2D" uid="uid://k0wolwi4snxm" path="res://original_assets/doors/Electronic Door Asset.png" id="3_qywqo"]
+[ext_resource type="Texture2D" uid="uid://cgxkhbjo1ma01" path="res://original_assets/desks/Cyberpunk Desk Asset (1).png" id="4_dhb00"]
+[ext_resource type="Texture2D" uid="uid://lsxh1idvtsm0" path="res://original_assets/flowers/Cyber Bouquet.png" id="5_jlr3k"]
+[ext_resource type="Texture2D" uid="uid://ctpadxjh1koei" path="res://original_assets/flowers/Larger Cyber Bouquet.png" id="6_w6bmt"]
+[ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://scenes/konqui.tscn" id="7_jlr3k"]
+[ext_resource type="Texture2D" uid="uid://dmarlhsdnhdie" path="res://original_assets/wall_elements/Dubai Tourist Photo.png" id="9_udh7t"]
+[ext_resource type="Texture2D" uid="uid://bq3kedbk8kg4a" path="res://original_assets/wall_elements/Tokyo Tourist Photo.png" id="10_udh7t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jlr3k"]
+distance = -3.0
+
+[node name="Node2D" type="Node2D" unique_id=117726116]
+
+[node name="FlatCenterWall" type="Sprite2D" parent="." unique_id=768421384]
+position = Vector2(432, 298)
+texture = ExtResource("1_6xaoj")
+
+[node name="FlatCenterWall" type="Sprite2D" parent="FlatCenterWall" unique_id=890345516]
+position = Vector2(1043, 0)
+texture = ExtResource("1_6xaoj")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=284784153]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground" unique_id=854077545]
+
+[node name="FloorBoundary" type="StaticBody2D" parent="." unique_id=484271413]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorBoundary" unique_id=1180843949]
+position = Vector2(398, 591)
+shape = SubResource("WorldBoundaryShape2D_jlr3k")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1375700936]
+texture_repeat = 2
+position = Vector2(892, 616)
+scale = Vector2(0.6337976, 0.36907977)
+texture = ExtResource("1_qjjge")
+region_enabled = true
+region_rect = Rect2(10.4, 1.4, 3072, 157.6)
+
+[node name="CyberpunkBedAsset" type="Sprite2D" parent="." unique_id=1041048431]
+position = Vector2(1423.213, 493.25)
+scale = Vector2(0.35706022, 0.3570602)
+texture = ExtResource("2_p017x")
+flip_h = true
+
+[node name="ElectronicDoorAsset" type="Sprite2D" parent="." unique_id=1527375888]
+position = Vector2(273, 404)
+scale = Vector2(0.5805664, 0.5805664)
+texture = ExtResource("3_qywqo")
+
+[node name="CyberpunkDeskAsset(1)" type="Sprite2D" parent="." unique_id=815815364]
+position = Vector2(804.1713, 500.875)
+scale = Vector2(0.33767363, 0.3376736)
+texture = ExtResource("4_dhb00")
+
+[node name="CyberBouquet" type="Sprite2D" parent="." unique_id=1635862252]
+position = Vector2(1744.25, 475.7685)
+scale = Vector2(0.22395836, 0.22395836)
+texture = ExtResource("5_jlr3k")
+
+[node name="LargerCyberBouquet" type="Sprite2D" parent="." unique_id=807746527]
+position = Vector2(-1.0000038, 508)
+scale = Vector2(0.15972222, 0.15972222)
+texture = ExtResource("6_w6bmt")
+flip_h = true
+
+[node name="CharacterBody2D" parent="." unique_id=442775144 instance=ExtResource("7_jlr3k")]
+position = Vector2(159, 458)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1824481483]
+position = Vector2(8, -139)
+
+[node name="DubaiTouristPhoto" type="Sprite2D" parent="." unique_id=1671454379]
+position = Vector2(498.00006, 299)
+scale = Vector2(0.1706543, 0.1706543)
+texture = ExtResource("9_udh7t")
+
+[node name="TokyoTouristPhoto" type="Sprite2D" parent="." unique_id=18660789]
+position = Vector2(1465, 245)
+scale = Vector2(0.15478507, 0.15478507)
+texture = ExtResource("10_udh7t")

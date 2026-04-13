@@ -36,6 +36,16 @@
 [ext_resource type="Texture2D" uid="uid://bymso84n2c1rq" path="res://assets/konqui/jump/jump_5.png" id="17_1oag8"]
 [ext_resource type="Texture2D" uid="uid://hqx3fcvoey4q" path="res://assets/konqui/run/run_8.png" id="17_kteyb"]
 [ext_resource type="Texture2D" uid="uid://bevkvlyvyx8ll" path="res://assets/konqui/run/run_9.png" id="18_kog5j"]
+[ext_resource type="Texture2D" uid="uid://5ueuhhwetp2m" path="res://assets/konqui/shocked/shocked_1.png" id="32_1ahn7"]
+[ext_resource type="Texture2D" uid="uid://t6ceacn1gyk1" path="res://assets/konqui/shocked/shocked_2.png" id="33_1t3ai"]
+[ext_resource type="Texture2D" uid="uid://dtoxg314thdmn" path="res://assets/konqui/shocked/shocked_3.png" id="34_v6eht"]
+[ext_resource type="Texture2D" uid="uid://j8s15lplvcmg" path="res://assets/konqui/shocked/shocked_4.png" id="35_3lp41"]
+[ext_resource type="Texture2D" uid="uid://cb0m5kbpifmr3" path="res://assets/konqui/shocked/shocked_5.png" id="36_af8bx"]
+[ext_resource type="Texture2D" uid="uid://dxvro7ue3evnk" path="res://assets/konqui/shocked/shocked_6.png" id="37_tf21s"]
+[ext_resource type="Texture2D" uid="uid://dxw2iwq81n1l4" path="res://assets/konqui/shocked/shocked_7.png" id="38_0p5fl"]
+[ext_resource type="Texture2D" uid="uid://djy4slxf7rxii" path="res://assets/konqui/shocked/shocked_8.png" id="39_kfevo"]
+[ext_resource type="Texture2D" uid="uid://bl1bfpt1io52i" path="res://assets/konqui/shocked/shocked_9.png" id="40_b3fiq"]
+[ext_resource type="Texture2D" uid="uid://rmpq8rcwqux8" path="res://assets/konqui/shocked/shocked_10.png" id="41_d2qj7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gaurk"]
 animations = [{
@@ -170,6 +180,41 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("32_1ahn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_1t3ai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_v6eht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_3lp41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_af8bx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_tf21s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_0p5fl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_kfevo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_b3fiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_d2qj7")
+}],
+"loop": true,
+"name": &"shocked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("10_cug4f")
 }, {
 "duration": 1.0,
@@ -201,7 +246,7 @@ script = ExtResource("1_tg8qb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=557573798]
 scale = Vector2(0.37894738, 0.45487365)
 sprite_frames = SubResource("SpriteFrames_gaurk")
-animation = &"attack"
+animation = &"shocked"
 
 [node name="CrouchShape" type="CollisionShape2D" parent="." unique_id=288772359]
 position = Vector2(-3, 30.5)

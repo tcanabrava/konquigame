@@ -21,7 +21,7 @@ func set_spawn_point(point: Vector2, direction: int):
 	position = SPAWN_POINT
 
 
-func hit():
+func hit(_body: Area2D):
 		print("Fireball hit")
 	
 func _physics_process(delta: float) -> void:

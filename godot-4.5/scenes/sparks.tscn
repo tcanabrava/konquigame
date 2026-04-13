@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://chhx0jjjv1qn2"]
+
+[ext_resource type="Script" uid="uid://ba6ltfwlgecqy" path="res://scripts/sparks.gd" id="1_xxqkp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7w7n"]
+size = Vector2(108, 20)
+
+[node name="Sparks" type="Area2D" unique_id=1935045140]
+script = ExtResource("1_xxqkp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1038519364]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_b7w7n")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=643733720]

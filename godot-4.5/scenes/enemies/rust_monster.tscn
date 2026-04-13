@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dumerosi64sf6"]
+
+[ext_resource type="Texture2D" uid="uid://brupst6s6v0dk" path="res://assets/rust_monster.png" id="1_ehs2q"]
+
+[node name="RustMonster" type="Node2D" unique_id=515460545]
+
+[node name="Pixmap" type="Sprite2D" parent="." unique_id=195033995]
+position = Vector2(-5.722046e-06, -6.1035156e-05)
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("1_ehs2q")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1952706339]

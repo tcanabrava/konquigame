@@ -1,19 +1,22 @@
 [gd_scene format=3 uid="uid://c8jp8db3fqhwj"]
 
-[ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://assets/Backgrounds/QuantumTunnel.jpg" id="1_pq8q7"]
+[ext_resource type="Script" uid="uid://dcnwi8clpg8s5" path="res://scripts/root.gd" id="1_sqa0i"]
+[ext_resource type="PackedScene" uid="uid://cp8xecdb4gxrd" path="res://scenes/bedroom.tscn" id="2_sqa0i"]
 [ext_resource type="PackedScene" uid="uid://cxjq1j6bfd21v" path="res://scenes/konqui_2d.tscn" id="2_twpsu"]
+[ext_resource type="PackedScene" uid="uid://chhx0jjjv1qn2" path="res://scenes/sparks.tscn" id="3_lrqlo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_twpsu"]
 
 [node name="Node2D" type="Node2D" unique_id=1789921046]
+script = ExtResource("1_sqa0i")
 
-[node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=11566269]
-position = Vector2(565, 338.5)
-scale = Vector2(0.73375, 0.75666666)
-texture = ExtResource("1_pq8q7")
+[node name="Bedroom" parent="." unique_id=1338674822 instance=ExtResource("2_sqa0i")]
 
 [node name="Konqui2D" parent="." unique_id=8103003 instance=ExtResource("2_twpsu")]
 position = Vector2(86, 333)
+
+[node name="Sparks" parent="." unique_id=1935045140 instance=ExtResource("3_lrqlo")]
+position = Vector2(679, 571)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1222128708]
 

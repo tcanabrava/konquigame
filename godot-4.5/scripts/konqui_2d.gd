@@ -20,9 +20,12 @@ var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
 var m_flip_sprite: bool = false
 var m_triggered_attack: bool = false
-
+var m_is_shocked: bool = false
 var current_equipment = null
 var current_software = null
+
+func receive_damage(damage: float, type: String):
+	print("Damage received", damage, type)
 
 func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
