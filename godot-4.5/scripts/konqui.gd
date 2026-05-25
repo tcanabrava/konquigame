@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Konqui2D
 
+@onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var crouch_shape: CollisionShape2D = $CrouchShape
 @onready var normal_shape: CollisionShape2D = $NormalShape
@@ -22,6 +23,9 @@ var m_is_shocked: bool = false
 var current_equipment = null
 var current_software = null
 
+func _ready() -> void:
+	point_light_2d.visible = false
+	
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
 
@@ -29,6 +33,7 @@ func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
 		return
 
+	
 	if m_is_crouched:
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
@@ -69,6 +74,13 @@ func apply_animation() -> void:
 	
 	if not is_zero_approx(velocity.x):
 		sprite.flip_h = m_flip_sprite
+
+	if sprite.flip_h:
+		point_light_2d.rotate(PI)
+		point_light_2d.position.x = -80
+	else:
+		point_light_2d.rotate(PI)
+		point_light_2d.position.x = 80
 
 	if m_triggered_attack:
 		sprite.play("attack")
@@ -145,15 +157,16 @@ func handle_crouching() -> bool:
 func handle_attack():
 	if !attack_timer.is_stopped():
 		return
-	
+	point_light_2d.visible = false
+
 	var is_attacking = Input.is_action_just_pressed("attack")
 	if !is_attacking:
 		return
 
+	point_light_2d.visible = true
 	m_triggered_attack = true
 	attack_timer.start()
 
-	var fireball_direction = -1 if sprite.flip_h else 1
 
 func _physics_process(delta: float) -> void:
 	if handle_death():

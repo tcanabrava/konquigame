@@ -3,13 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://dct6ejl80lqcf" path="res://original_assets/wall_elements/Flat Center Wall.png" id="1_i074w"]
 [ext_resource type="Script" uid="uid://bsl5k4wtr54o6" path="res://scripts/konqui_office.gd" id="1_w547p"]
 [ext_resource type="Texture2D" uid="uid://cq4a85xdx2s12" path="res://original_assets/floors/Cyber Floor Center Tile.png" id="2_w547p"]
-[ext_resource type="Texture2D" uid="uid://k0wolwi4snxm" path="res://original_assets/doors/Electronic Door Asset.png" id="3_4h5h6"]
 [ext_resource type="Texture2D" uid="uid://cgxkhbjo1ma01" path="res://original_assets/desks/Cyberpunk Desk Asset (1).png" id="4_w8u7w"]
 [ext_resource type="Texture2D" uid="uid://lsxh1idvtsm0" path="res://original_assets/flowers/Cyber Bouquet.png" id="5_2rus3"]
 [ext_resource type="Texture2D" uid="uid://ctpadxjh1koei" path="res://original_assets/flowers/Larger Cyber Bouquet.png" id="6_8lvix"]
 [ext_resource type="Texture2D" uid="uid://dmarlhsdnhdie" path="res://original_assets/wall_elements/Dubai Tourist Photo.png" id="7_r34by"]
 [ext_resource type="Texture2D" uid="uid://bq3kedbk8kg4a" path="res://original_assets/wall_elements/Tokyo Tourist Photo.png" id="8_4iq17"]
 [ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://scenes/konqui.tscn" id="9_2tqow"]
+[ext_resource type="PackedScene" uid="uid://vov63msbphpw" path="res://scenes/EletronicDoor.tscn" id="10_w547p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jlr3k"]
 distance = -3.0
@@ -40,11 +40,6 @@ texture = ExtResource("2_w547p")
 region_enabled = true
 region_rect = Rect2(10.4, 1.4, 3072, 157.6)
 
-[node name="ElectronicDoorAsset" type="Sprite2D" parent="." unique_id=1527375888]
-position = Vector2(273, 404)
-scale = Vector2(0.5805664, 0.5805664)
-texture = ExtResource("3_4h5h6")
-
 [node name="CyberpunkDeskAsset(1)" type="Sprite2D" parent="." unique_id=815815364]
 position = Vector2(804.1713, 500.875)
 scale = Vector2(0.33767363, 0.3376736)
@@ -73,12 +68,17 @@ texture = ExtResource("8_4iq17")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1447126844]
 position = Vector2(820, 461)
-color = Color(0.096204735, 0.09620475, 0.096204735, 1)
 
 [node name="Konqui" parent="." unique_id=442775144 instance=ExtResource("9_2tqow")]
+light_mask = 2
+z_index = 20
 position = Vector2(820, 461)
 
 [node name="Camera2D" type="Camera2D" parent="Konqui" unique_id=1824481483]
 position = Vector2(8, -139)
 
 [node name="LightsOutTimer" type="Timer" parent="." unique_id=1408287242]
+
+[node name="EletronicDoor" parent="." unique_id=520004048 instance=ExtResource("10_w547p")]
+position = Vector2(252.00003, 378)
+scale = Vector2(0.65598357, 0.65598357)

@@ -41,10 +41,16 @@
 [ext_resource type="Texture2D" uid="uid://c0jrjy4bdakrc" path="res://assets/konqui/walking/walking_5.png" id="21_sssab"]
 [ext_resource type="Script" uid="uid://b0u30uldh48av" path="res://scripts/konqui.gd" id="40_yx1sv"]
 
+[sub_resource type="Gradient" id="Gradient_yx1sv"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uyn3n"]
+gradient = SubResource("Gradient_yx1sv")
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_71k4f"]
 animations = [{
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -61,7 +67,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_71k4f")
 }],
-"loop": true,
+"loop": 1,
 "name": &"climbing_back",
 "speed": 5.0
 }, {
@@ -72,7 +78,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_r52ob")
 }],
-"loop": true,
+"loop": 1,
 "name": &"climbing_front",
 "speed": 5.0
 }, {
@@ -83,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_s0j4k")
 }],
-"loop": true,
+"loop": 1,
 "name": &"climbing_side",
 "speed": 5.0
 }, {
@@ -100,7 +106,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_e1jej")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawling",
 "speed": 6.0
 }, {
@@ -120,7 +126,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_wicfb")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dying_impact",
 "speed": 6.0
 }, {
@@ -143,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_17w0c")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dying_normal",
 "speed": 5.0
 }, {
@@ -160,7 +166,7 @@ animations = [{
 "duration": 2.0,
 "texture": ExtResource("15_c47vb")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle_cellphone",
 "speed": 7.0
 }, {
@@ -171,12 +177,12 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_c47vb")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_juggling",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -196,7 +202,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("16_soj47")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 5.0
 }, {
@@ -216,7 +222,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_sssab")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 5.0
 }]
@@ -230,6 +236,10 @@ size = Vector2(146, 70)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=442775144]
 script = ExtResource("40_yx1sv")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1767233404]
+position = Vector2(80, 0)
+texture = SubResource("GradientTexture2D_uyn3n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1599843782]
 position = Vector2(7.9999924, 10.999992)
@@ -246,3 +256,4 @@ position = Vector2(-5, 63)
 shape = SubResource("RectangleShape2D_yx1sv")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=175412742]
+one_shot = true
