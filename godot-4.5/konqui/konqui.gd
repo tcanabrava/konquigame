@@ -125,22 +125,14 @@ func handle_flip_graphics():
 	sprite.flip_h = m_flip_sprite
 	
 
-func handle_jumping(delta: float) -> bool:
-	var is_jumping: bool = Input.is_action_just_pressed("jump")
-	
-	if is_on_floor() and is_jumping:
+func handle_jumping(delta: float):
+	if is_on_floor():
 		velocity.y = -JUMP_STRENGTH
 
-	velocity.y += delta * GRAVITY
-	return is_jumping
-
-func handle_death() -> bool:
-	var is_dying: bool = Input.is_action_just_pressed("fakedeath")
-	if is_dying:
-		m_life=0
-		apply_animation()
-		set_physics_process(false)
-	return is_dying
+func handle_death():
+	m_life=0
+	apply_animation()
+	set_physics_process(false)
  
 func handle_crouching() -> bool:
 	m_is_crouching = Input.is_action_just_pressed("down")
@@ -161,18 +153,10 @@ func handle_attack():
 	if !attack_timer.is_stopped():
 		return
 
-	var is_attacking = Input.is_action_just_pressed("attack")
-	if !is_attacking:
-		return
-
 	m_triggered_attack = true
 	attack_timer.start()
 
 func handle_equiped_item():
-	var trying_to_use_item = Input.is_action_just_pressed("use_equiped_item")
-	if not trying_to_use_item:
-		return
-
 	if current_equipment == null:
 		return
 
@@ -186,10 +170,6 @@ func handle_equiped_item():
 	current_equipment.start_use()
 
 func toggle_current_item():
-	var trying_to_use_item = Input.is_action_just_pressed("toggle_equiped_item")
-	if not trying_to_use_item:
-		return
-	
 	if not current_equipment:
 		return 
 
@@ -200,14 +180,26 @@ func toggle_current_item():
 	current_equipment.equip()
 
 func _physics_process(delta: float) -> void:
-	if handle_death():
+	if Input.is_action_just_pressed("fakedeath"):
+		handle_death()
 		return
 
-	handle_jumping(delta)
+	if Input.is_action_just_pressed("jump"):
+		handle_jumping(delta)
+
+	if Input.is_action_just_pressed("attack"):
+		handle_attack()
+
+	if Input.is_action_just_pressed("toggle_equiped_item"):
+		toggle_current_item()
+
+	if Input.is_action_just_pressed("use_equiped_item"):
+		handle_equiped_item()
+
 	handle_crouching()
-	handle_attack()
-	toggle_current_item()
-	handle_equiped_item()
+
 	calc_horizontal_velocity(delta)
 	apply_animation()
+
+	velocity.y += delta * GRAVITY
 	move_and_slide()
