@@ -42,9 +42,5 @@ func stop_use():
 	return true
 
 func handle_flip_direction():
-	var parent = get_parent()
-	print(parent.item_position_marker.position)
-	print(parent.item_position_marker.transform)
-
 	flashlight_instance.position = get_parent().item_position_marker.position
 	flashlight_instance.scale.x *= -1
