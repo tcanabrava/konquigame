@@ -43,3 +43,6 @@ func stop_use() -> bool:
 
 	in_use = false
 	return true
+
+func handle_flip_direction():
+	pass

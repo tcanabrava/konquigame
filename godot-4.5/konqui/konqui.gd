@@ -6,6 +6,7 @@ class_name Konqui2D
 @onready var crouch_shape: CollisionShape2D = $CrouchShape
 @onready var normal_shape: CollisionShape2D = $NormalShape
 @onready var attack_timer: Timer = $AttackTimer
+@onready var item_position_marker: Marker2D = $ItemPositionMarker
 
 const JUMP_STRENGTH: float = 400.0
 const WALKING_SPEED: float = 300.0
@@ -38,7 +39,7 @@ func calc_horizontal_velocity(delta: float):
 	if m_is_crouched:
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
-		
+
 	var input_direction: float = Input.get_axis("left", "right")
 	var is_running: bool = Input.is_action_pressed("run")
 	
@@ -123,7 +124,10 @@ func handle_flip_graphics():
 		return
 
 	sprite.flip_h = m_flip_sprite
+	item_position_marker.position.x *= -1
 	
+	if current_equipment:
+		current_equipment.handle_flip_direction()
 
 func handle_jumping(delta: float):
 	if is_on_floor():

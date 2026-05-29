@@ -247,3 +247,6 @@ shape = SubResource("RectangleShape2D_yx1sv")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=175412742]
 one_shot = true
+
+[node name="ItemPositionMarker" type="Marker2D" parent="." unique_id=1635374545]
+position = Vector2(60, 61)
