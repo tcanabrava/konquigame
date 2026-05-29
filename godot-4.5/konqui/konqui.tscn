@@ -40,7 +40,6 @@
 [ext_resource type="Texture2D" uid="uid://7hk2twq1umks" path="res://konqui/walking/walking_4.png" id="20_yx1sv"]
 [ext_resource type="Texture2D" uid="uid://c0jrjy4bdakrc" path="res://konqui/walking/walking_5.png" id="21_sssab"]
 [ext_resource type="Script" uid="uid://b0u30uldh48av" path="res://konqui/konqui.gd" id="40_yx1sv"]
-[ext_resource type="PackedScene" uid="uid://d16b0wggnktl4" path="res://flashlight/flashlight.tscn" id="41_ksw2q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_71k4f"]
 animations = [{
@@ -248,7 +247,3 @@ shape = SubResource("RectangleShape2D_yx1sv")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=175412742]
 one_shot = true
-
-[node name="Flashlight" parent="." unique_id=1058717208 instance=ExtResource("41_ksw2q")]
-position = Vector2(179, 50)
-scale = Vector2(0.5, 0.5)

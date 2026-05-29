@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 class_name Konqui2D
 
-@onready var flashlight: PointLight2D = $Flashlight
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var crouch_shape: CollisionShape2D = $CrouchShape
 @onready var normal_shape: CollisionShape2D = $NormalShape
@@ -24,7 +23,7 @@ var current_equipment: EquipableItem = null
 var current_software = null
 
 func _ready() -> void:
-	flashlight.visible = false
+	pass
 	
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
@@ -123,9 +122,6 @@ func handle_flip_graphics():
 
 	sprite.flip_h = m_flip_sprite
 	
-	flashlight.rotate(PI)
-	flashlight.position.x *= -1
-
 
 func handle_jumping(delta: float) -> bool:
 	var is_jumping: bool = Input.is_action_just_pressed("jump")
@@ -162,13 +158,11 @@ func handle_crouching() -> bool:
 func handle_attack():
 	if !attack_timer.is_stopped():
 		return
-	flashlight.visible = false
 
 	var is_attacking = Input.is_action_just_pressed("attack")
 	if !is_attacking:
 		return
 
-	flashlight.visible = true
 	m_triggered_attack = true
 	attack_timer.start()
 
