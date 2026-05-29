@@ -173,22 +173,16 @@ func handle_equiped_item():
 	if not trying_to_use_item:
 		return
 
-	print("Calling Handle Equipment func")
 	if current_equipment == null:
 		return
 
-	print("Has an item.")
 	if not current_equipment.equiped:
 		return
 
-	print("Item is equiped")
 	if current_equipment.in_use:
-		print("Item is in use, stopping")
-
 		current_equipment.stop_use()
 		return
 
-	print("Item is not in use, starting.")
 	current_equipment.start_use()
 
 func toggle_current_item():
@@ -196,17 +190,14 @@ func toggle_current_item():
 	if not trying_to_use_item:
 		return
 	
-	print("Toggling current item")
 	if not current_equipment:
 		return 
 
-	print("We have a current item, so let's try to equip or unequip")
 	if current_equipment.equiped:
-		print("Item is equiped, unequiping.")
 		current_equipment.unequip()
-	else:
-		print("Item is not equiped, equiping.")
-		current_equipment.equip()
+		return
+
+	current_equipment.equip()
 
 func _physics_process(delta: float) -> void:
 	if handle_death():
