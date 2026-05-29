@@ -4,6 +4,9 @@ class_name konqui_office
 
 @onready var lights_out_timer: Timer = $LightsOutTimer
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var konqui: Konqui2D = $Konqui
+
+const FlashlightItem = preload("uid://oc0lg1186ma8")
 
 func turn_off_light():
 	canvas_modulate.color = "#111111"
@@ -15,3 +18,7 @@ func _ready() -> void:
 	turn_on_light()
 	lights_out_timer.timeout.connect(turn_off_light)
 	lights_out_timer.start(3)
+	
+	var flashlight = FlashlightItem.new()
+	konqui.add_child(flashlight)
+	konqui.set_current_equipment(flashlight)

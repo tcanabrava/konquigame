@@ -22,6 +22,9 @@ var m_is_shocked: bool = false
 var current_equipment: EquipableItem = null
 var current_software = null
 
+func set_current_equipment(equipment: EquipableItem):
+	current_equipment = equipment
+
 func _ready() -> void:
 	pass
 	
@@ -32,7 +35,6 @@ func calc_horizontal_velocity(delta: float):
 	if not is_on_floor():
 		return
 
-	
 	if m_is_crouched:
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
@@ -166,6 +168,45 @@ func handle_attack():
 	m_triggered_attack = true
 	attack_timer.start()
 
+func handle_equiped_item():
+	var trying_to_use_item = Input.is_action_just_pressed("use_equiped_item")
+	if not trying_to_use_item:
+		return
+
+	print("Calling Handle Equipment func")
+	if current_equipment == null:
+		return
+
+	print("Has an item.")
+	if not current_equipment.equiped:
+		return
+
+	print("Item is equiped")
+	if current_equipment.in_use:
+		print("Item is in use, stopping")
+
+		current_equipment.stop_use()
+		return
+
+	print("Item is not in use, starting.")
+	current_equipment.start_use()
+
+func toggle_current_item():
+	var trying_to_use_item = Input.is_action_just_pressed("toggle_equiped_item")
+	if not trying_to_use_item:
+		return
+	
+	print("Toggling current item")
+	if not current_equipment:
+		return 
+
+	print("We have a current item, so let's try to equip or unequip")
+	if current_equipment.equiped:
+		print("Item is equiped, unequiping.")
+		current_equipment.unequip()
+	else:
+		print("Item is not equiped, equiping.")
+		current_equipment.equip()
 
 func _physics_process(delta: float) -> void:
 	if handle_death():
@@ -174,6 +215,8 @@ func _physics_process(delta: float) -> void:
 	handle_jumping(delta)
 	handle_crouching()
 	handle_attack()
+	toggle_current_item()
+	handle_equiped_item()
 	calc_horizontal_velocity(delta)
 	apply_animation()
 	move_and_slide()
