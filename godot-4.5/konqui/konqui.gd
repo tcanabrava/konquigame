@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Konqui2D
 
-@onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var flashlight: PointLight2D = $Flashlight
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var crouch_shape: CollisionShape2D = $CrouchShape
 @onready var normal_shape: CollisionShape2D = $NormalShape
@@ -24,7 +24,7 @@ var current_equipment = null
 var current_software = null
 
 func _ready() -> void:
-	point_light_2d.visible = false
+	flashlight.visible = false
 	
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
@@ -72,15 +72,7 @@ func apply_animation() -> void:
 		sprite.play(death_anim)
 		return
 	
-	if not is_zero_approx(velocity.x):
-		sprite.flip_h = m_flip_sprite
-
-	if sprite.flip_h:
-		point_light_2d.rotate(PI)
-		point_light_2d.position.x = -80
-	else:
-		point_light_2d.rotate(PI)
-		point_light_2d.position.x = 80
+	handle_flip_graphics()
 
 	if m_triggered_attack:
 		sprite.play("attack")
@@ -122,6 +114,19 @@ func apply_animation() -> void:
 		
 	return
 
+func handle_flip_graphics():
+	if sprite.flip_h == m_flip_sprite:
+		return
+
+	if is_zero_approx(velocity.x):
+		return
+
+	sprite.flip_h = m_flip_sprite
+	
+	flashlight.rotate(PI)
+	flashlight.position.x *= -1
+
+
 func handle_jumping(delta: float) -> bool:
 	var is_jumping: bool = Input.is_action_just_pressed("jump")
 	
@@ -157,13 +162,13 @@ func handle_crouching() -> bool:
 func handle_attack():
 	if !attack_timer.is_stopped():
 		return
-	point_light_2d.visible = false
+	flashlight.visible = false
 
 	var is_attacking = Input.is_action_just_pressed("attack")
 	if !is_attacking:
 		return
 
-	point_light_2d.visible = true
+	flashlight.visible = true
 	m_triggered_attack = true
 	attack_timer.start()
 

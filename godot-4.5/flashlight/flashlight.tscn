@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d16b0wggnktl4"]
+
+[ext_resource type="Texture2D" uid="uid://cdjhroe8q4yn3" path="res://flashlight/flashlight-mask.png" id="1_qrrg0"]
+
+[node name="Flashlight" type="PointLight2D" unique_id=1058717208]
+texture = ExtResource("1_qrrg0")

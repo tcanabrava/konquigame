@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cb6412nrx0n7j"]
+
+[ext_resource type="Texture2D" uid="uid://cdjhroe8q4yn3" path="res://flashlight/flashlight-mask.png" id="1_72xhm"]
+[ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://backgrounds/QuantumTunnel.jpg" id="1_bq8c2"]
+[ext_resource type="PackedScene" uid="uid://d16b0wggnktl4" path="res://flashlight/flashlight.tscn" id="2_72xhm"]
+[ext_resource type="Texture2D" uid="uid://kcr4lj2b3v4m" path="res://enemies/rust_mob/rust_mob_1.png" id="4_oxo52"]
+
+[node name="TestLights" type="PointLight2D" unique_id=281870968]
+texture = ExtResource("1_72xhm")
+
+[node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=1906364613]
+position = Vector2(587, 246)
+texture = ExtResource("1_bq8c2")
+
+[node name="Flashlight" parent="." unique_id=1058717208 instance=ExtResource("2_72xhm")]
+position = Vector2(423, 382)
+
+[node name="RustMob1" type="Sprite2D" parent="." unique_id=1314355625]
+position = Vector2(567, 501)
+scale = Vector2(0.33583334, 0.405)
+texture = ExtResource("4_oxo52")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="RustMob1" unique_id=1290917332]
+color = Color(0.037521444, 0.007443702, 0, 1)
