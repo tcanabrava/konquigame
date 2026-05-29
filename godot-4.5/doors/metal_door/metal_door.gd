@@ -11,7 +11,7 @@ func unlock():
 	animated_sprite_2d.play("unlocked")
 
 func lock():
-	animated_sprite_2d.play("unlocked")
+	animated_sprite_2d.play("locked")
 	
 func open():
 	animated_sprite_2d.play("opening")
