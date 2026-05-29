@@ -20,7 +20,7 @@ var m_is_crouched: bool = false
 var m_flip_sprite: bool = false
 var m_triggered_attack: bool = false
 var m_is_shocked: bool = false
-var current_equipment = null
+var current_equipment: EquipableItem = null
 var current_software = null
 
 func _ready() -> void:
