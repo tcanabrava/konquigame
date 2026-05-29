@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cp8xecdb4gxrd"]
+
+[ext_resource type="Texture2D" uid="uid://7wslhvxf8gfu" path="res://scenario/wall_background.png" id="1_v7ljh"]
+[ext_resource type="Texture2D" uid="uid://ckxdkdjiclf46" path="res://scenario/wood_drawer.png" id="2_7ldce"]
+[ext_resource type="Texture2D" uid="uid://cvwk51st7ek01" path="res://scenario/blue_bed.png" id="3_oa37o"]
+
+[node name="Bedroom" type="Node2D" unique_id=1338674822]
+
+[node name="WallBackground" type="Sprite2D" parent="." unique_id=1116429654]
+position = Vector2(953, 119)
+texture = ExtResource("1_v7ljh")
+
+[node name="WoodDrawer" type="Sprite2D" parent="." unique_id=1097912025]
+position = Vector2(925, 119)
+texture = ExtResource("2_7ldce")
+
+[node name="BlueBed" type="Sprite2D" parent="." unique_id=1210468299]
+position = Vector2(930, 124)
+texture = ExtResource("3_oa37o")

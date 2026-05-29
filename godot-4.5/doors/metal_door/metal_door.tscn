@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://vov63msbphpw"]
+
+[ext_resource type="Script" uid="uid://ksk4ddbjdaei" path="res://doors/metal_door/metal_door.gd" id="1_kr6p5"]
+[ext_resource type="Texture2D" uid="uid://k0wolwi4snxm" path="res://original_assets/doors/Electronic Door Asset.png" id="2_axw7y"]
+[ext_resource type="Texture2D" uid="uid://duxqsyes2m2h5" path="res://original_assets/doors/Electronic Door Asset (Open).png" id="3_v3r6a"]
+[ext_resource type="Texture2D" uid="uid://bms5014k3ixas" path="res://original_assets/doors/Door Slide Frame 2.png" id="4_ycc5r"]
+[ext_resource type="Texture2D" uid="uid://p34f4up8v5lt" path="res://original_assets/doors/Door Slide Frame 3.png" id="5_36git"]
+
+[sub_resource type="Gradient" id="Gradient_4h5h6"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bwlqp"]
+gradient = SubResource("Gradient_4h5h6")
+fill = 1
+fill_from = Vector2(0.52820516, 0.4974359)
+fill_to = Vector2(0.104273506, 0.8735043)
+
+[sub_resource type="Gradient" id="Gradient_w547p"]
+offsets = PackedFloat32Array(0, 0.4696532, 0.57080925, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nl0fk"]
+gradient = SubResource("Gradient_w547p")
+fill_from = Vector2(0, 0.52136755)
+fill_to = Vector2(1, 0.48376068)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uidou"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_axw7y")
+}],
+"loop": 1,
+"name": &"locked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("3_v3r6a")
+}, {
+"duration": 1.5,
+"texture": ExtResource("4_ycc5r")
+}, {
+"duration": 1.5,
+"texture": ExtResource("5_36git")
+}],
+"loop": 0,
+"name": &"opening",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v3r6a")
+}],
+"loop": 1,
+"name": &"unlocked",
+"speed": 5.0
+}]
+
+[node name="EletronicDoor" type="Node2D" unique_id=520004048]
+script = ExtResource("1_kr6p5")
+
+[node name="LedLight5" type="PointLight2D" parent="." unique_id=518690550]
+position = Vector2(158.99998, 217.00003)
+scale = Vector2(0.25000003, 0.25000006)
+texture = SubResource("GradientTexture2D_bwlqp")
+
+[node name="LedLight4" type="PointLight2D" parent="." unique_id=618098818]
+position = Vector2(141.50002, 217.00003)
+scale = Vector2(0.26562488, -0.24999993)
+texture = SubResource("GradientTexture2D_bwlqp")
+
+[node name="LedLight3" type="PointLight2D" parent="." unique_id=994160434]
+position = Vector2(122.00001, 217.00003)
+scale = Vector2(0.3281256, -0.28593245)
+texture = SubResource("GradientTexture2D_bwlqp")
+
+[node name="LedLight2" type="PointLight2D" parent="." unique_id=1116375032]
+position = Vector2(104, 216.00006)
+scale = Vector2(0.31103507, -0.31201681)
+texture = SubResource("GradientTexture2D_bwlqp")
+
+[node name="LedLight1" type="PointLight2D" parent="." unique_id=809334870]
+position = Vector2(86, 217.00003)
+scale = Vector2(0.28124997, 0.28125072)
+texture = SubResource("GradientTexture2D_bwlqp")
+
+[node name="LockedLight" type="PointLight2D" parent="." unique_id=143494462]
+light_mask = 8
+position = Vector2(122.500015, 150.00003)
+scale = Vector2(1.6093749, 1.3125006)
+range_z_max = 10
+range_layer_max = 2
+texture = SubResource("GradientTexture2D_nl0fk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=576948493]
+sprite_frames = SubResource("SpriteFrames_uidou")
+animation = &"opening"
+frame = 2
+frame_progress = 1.0
