@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://flsh7d0ahfin"]
+
+[ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://backgrounds/QuantumTunnel.jpg" id="1_iybd7"]
+[ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://konqui/konqui.tscn" id="2_nleuf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uyn3n"]
+
+[node name="TestJump" type="Node2D" unique_id=847414090]
+
+[node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=656873754]
+position = Vector2(471, 222)
+texture = ExtResource("1_iybd7")
+
+[node name="Konqui" parent="." unique_id=442775144 instance=ExtResource("2_nleuf")]
+position = Vector2(282, 463)
+
+[node name="Area2D" type="StaticBody2D" parent="." unique_id=2131865900]
+position = Vector2(110, 425)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=217675630]
+position = Vector2(471, 222)
+shape = SubResource("WorldBoundaryShape2D_uyn3n")

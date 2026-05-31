@@ -28,7 +28,7 @@ func set_current_equipment(equipment: EquipableItem):
 
 func _ready() -> void:
 	pass
-	
+
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
 
@@ -42,17 +42,17 @@ func calc_horizontal_velocity(delta: float):
 
 	var input_direction: float = Input.get_axis("left", "right")
 	var is_running: bool = Input.is_action_pressed("run")
-	
+
 	if is_zero_approx(input_direction):
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
-		
+
 	m_flip_sprite = input_direction < 0.0
-	
+
 	var next_velocity = WALKING_SPEED
 	if is_running:
 		next_velocity += RUNNING_SPEED
-	
+
 	if input_direction < 0.0:
 		next_velocity *= -1;
 
@@ -67,13 +67,13 @@ func apply_animation() -> void:
 			death_anim = "dying_impact"
 		else:
 			death_anim = "dying_normal"
-			
+
 		if sprite.animation == death_anim:
 			return
 
 		sprite.play(death_anim)
 		return
-	
+
 	handle_flip_graphics()
 
 	if m_triggered_attack:
@@ -85,7 +85,7 @@ func apply_animation() -> void:
 		sprite.stop()
 		sprite.play("crouch")
 		return
-		
+
 	if m_is_crouched:
 		return
 
@@ -108,12 +108,12 @@ func apply_animation() -> void:
 
 	if abs(velocity.x) > 0.0:
 		if sprite.animation != "walk" || !sprite.is_playing():
-			sprite.play("walk")	
+			sprite.play("walk")
 		return
 
-	if is_zero_approx(velocity.x) && sprite.animation == "walk": 
-		sprite.stop() 
-		
+	if is_zero_approx(velocity.x) && sprite.animation == "walk":
+		sprite.stop()
+
 	return
 
 func handle_flip_graphics():
@@ -125,7 +125,7 @@ func handle_flip_graphics():
 
 	sprite.flip_h = m_flip_sprite
 	item_position_marker.position.x *= -1
-	
+
 	if current_equipment:
 		current_equipment.handle_flip_direction()
 
@@ -137,20 +137,20 @@ func handle_death():
 	m_life=0
 	apply_animation()
 	set_physics_process(false)
- 
+
 func handle_crouching() -> bool:
 	m_is_crouching = Input.is_action_just_pressed("down")
 	m_is_getting_up = Input.is_action_just_released("down")
 	if !m_is_crouching && !m_is_getting_up:
 		return false
-		
+
 	m_is_crouched = m_is_crouching || m_is_crouched
 	if m_is_getting_up:
 		m_is_crouched = false
 
 	crouch_shape.disabled = !m_is_crouched
 	normal_shape.disabled = m_is_crouched
-	
+
 	return true
 
 func handle_attack():
@@ -175,7 +175,7 @@ func handle_equiped_item():
 
 func toggle_current_item():
 	if not current_equipment:
-		return 
+		return
 
 	if current_equipment.equiped:
 		current_equipment.unequip()
