@@ -21,6 +21,7 @@ offset_left = 45.0
 offset_top = 109.0
 offset_right = 167.0
 offset_bottom = 140.0
+focus_mode = 0
 text = "WallJump
 "
 metadata/_edit_use_anchors_ = true
@@ -30,6 +31,7 @@ offset_left = 46.0
 offset_top = 64.0
 offset_right = 170.0
 offset_bottom = 95.0
+focus_mode = 0
 text = "Wall Grab"
 
 [node name="DoubleJump" type="CheckButton" parent="." unique_id=1086452225]
@@ -37,6 +39,7 @@ offset_left = 36.0
 offset_top = 28.0
 offset_right = 80.0
 offset_bottom = 52.0
+focus_mode = 0
 text = "Double Jump"
 
 [node name="Area2D" type="StaticBody2D" parent="." unique_id=2131865900]
