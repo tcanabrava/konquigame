@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://backgrounds/QuantumTunnel.jpg" id="1_iybd7"]
 [ext_resource type="Script" uid="uid://c28wsxsybr3lb" path="res://tests/test_jump.gd" id="1_nleuf"]
 [ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://konqui/konqui.tscn" id="2_nleuf"]
+[ext_resource type="Texture2D" uid="uid://ckxdkdjiclf46" path="res://scenario/wood_drawer.png" id="3_t7bhc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyn3n"]
+size = Vector2(508, 355)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uyn3n"]
 
@@ -12,6 +16,16 @@ script = ExtResource("1_nleuf")
 [node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=656873754]
 position = Vector2(471, 222)
 texture = ExtResource("1_iybd7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=855489900]
+position = Vector2(243, 107)
+texture = ExtResource("3_t7bhc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=349572954]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=1233407573]
+position = Vector2(654, 360.5)
+shape = SubResource("RectangleShape2D_uyn3n")
 
 [node name="Konqui" parent="." unique_id=442775144 instance=ExtResource("2_nleuf")]
 position = Vector2(282, 463)
