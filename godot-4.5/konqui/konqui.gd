@@ -23,6 +23,11 @@ var m_is_shocked: bool = false
 var current_equipment: EquipableItem = null
 var current_software = null
 
+var can_double_jump: bool = false
+var can_wall_jump: bool = false
+var can_wall_grab: bool = false
+var double_jump_count: int = 0
+
 func set_current_equipment(equipment: EquipableItem):
 	current_equipment = equipment
 
@@ -133,6 +138,10 @@ func handle_jumping(delta: float):
 	if is_on_floor():
 		velocity.y = -JUMP_STRENGTH
 
+	if can_double_jump && !is_on_floor() && double_jump_count < 1:
+		velocity.y = -JUMP_STRENGTH
+		double_jump_count += 1
+
 func handle_death():
 	m_life=0
 	apply_animation()
@@ -207,3 +216,6 @@ func _physics_process(delta: float) -> void:
 
 	velocity.y += delta * GRAVITY
 	move_and_slide()
+
+	if is_on_floor():
+		double_jump_count = 0

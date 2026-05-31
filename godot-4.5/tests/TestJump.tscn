@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://flsh7d0ahfin"]
 
 [ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://backgrounds/QuantumTunnel.jpg" id="1_iybd7"]
+[ext_resource type="Script" uid="uid://c28wsxsybr3lb" path="res://tests/test_jump.gd" id="1_nleuf"]
 [ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://konqui/konqui.tscn" id="2_nleuf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uyn3n"]
 
 [node name="TestJump" type="Node2D" unique_id=847414090]
+script = ExtResource("1_nleuf")
 
 [node name="QuantumTunnel" type="Sprite2D" parent="." unique_id=656873754]
 position = Vector2(471, 222)
@@ -13,6 +15,29 @@ texture = ExtResource("1_iybd7")
 
 [node name="Konqui" parent="." unique_id=442775144 instance=ExtResource("2_nleuf")]
 position = Vector2(282, 463)
+
+[node name="WallJump" type="CheckButton" parent="." unique_id=558798423]
+offset_left = 45.0
+offset_top = 109.0
+offset_right = 167.0
+offset_bottom = 140.0
+text = "WallJump
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="WallGrab" type="CheckButton" parent="." unique_id=1297358847]
+offset_left = 46.0
+offset_top = 64.0
+offset_right = 170.0
+offset_bottom = 95.0
+text = "Wall Grab"
+
+[node name="DoubleJump" type="CheckButton" parent="." unique_id=1086452225]
+offset_left = 36.0
+offset_top = 28.0
+offset_right = 80.0
+offset_bottom = 52.0
+text = "Double Jump"
 
 [node name="Area2D" type="StaticBody2D" parent="." unique_id=2131865900]
 position = Vector2(110, 425)
