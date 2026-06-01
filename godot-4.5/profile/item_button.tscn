@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://o5x1y2b02bk8"]
+
+[node name="ItemButton" type="TextureButton" unique_id=318128078]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)

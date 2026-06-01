@@ -13,6 +13,9 @@ const WALKING_SPEED: float = 300.0
 const RUNNING_SPEED: float = 200.0
 const WALL_DRAG_FALL_SPEED: float = 20.0
 
+const PROFILE_SCENE: PackedScene = preload("uid://gpi8gwa5sddr")
+var profile_scene: Node = null
+
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var m_life: int = 1
@@ -248,7 +251,25 @@ func handle_drag_wall() -> void:
 			m_is_dragging = false
 			m_disable_fall = false
 
+func handle_profile() -> void:
+	print("Handle profile called")
+	if profile_scene is Node:
+		print("Profile exists, toggling visibility")
+		profile_scene.visible = not profile_scene.visible
+		return
+
+	print("Profile does not exist, instantiating")
+	profile_scene = PROFILE_SCENE.instantiate()
+	get_tree().root.get_child(0).add_child(profile_scene)
+	profile_scene.visible = true
+	return
+
+
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("profile"):
+		handle_profile()
+		return
+
 	if Input.is_action_just_pressed("fakedeath"):
 		handle_death()
 		return
@@ -274,7 +295,6 @@ func _physics_process(delta: float) -> void:
 	calc_horizontal_velocity(delta)
 	apply_animation()
 
-	print(m_disable_fall)
 	if not m_disable_fall:
 		velocity.y += delta * GRAVITY
 
