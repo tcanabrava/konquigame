@@ -168,6 +168,8 @@ func handle_jumping(delta: float):
 			velocity.y = -JUMP_STRENGTH
 			velocity.x = -WALKING_SPEED if normal.x < 0 else WALKING_SPEED
 
+			m_flip_sprite = not m_flip_sprite
+
 			m_is_dragging = false
 			m_disable_fall = false
 
