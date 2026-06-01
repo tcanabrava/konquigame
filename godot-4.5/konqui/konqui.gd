@@ -11,13 +11,22 @@ class_name Konqui2D
 const JUMP_STRENGTH: float = 400.0
 const WALKING_SPEED: float = 300.0
 const RUNNING_SPEED: float = 200.0
+const WALL_DRAG_FALL_SPEED: float = 20.0
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 var m_life: int = 1
 var m_is_crouching: bool = false
 var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
+var m_is_dragging: bool = false
 var m_flip_sprite: bool = false
+
+# Disable fall should be used to prevent
+# the phisics engine to move the downwards or to completely
+# change how gravity works, such as when you are flying
+# or dragging on the wall.
+var m_disable_fall: bool = false
 var m_triggered_attack: bool = false
 var m_is_shocked: bool = false
 var current_equipment: EquipableItem = null
@@ -135,12 +144,34 @@ func handle_flip_graphics():
 		current_equipment.handle_flip_direction()
 
 func handle_jumping(delta: float):
+	# Jump when on floor, double jump when not on floor and can double jump, wall jump when dragging and on wall
 	if is_on_floor():
 		velocity.y = -JUMP_STRENGTH
+		return
 
-	if can_double_jump && !is_on_floor() && double_jump_count < 1:
+	var double_jump = can_double_jump and not m_is_dragging and not is_on_floor() and double_jump_count < 1
+	if double_jump:
+		print("Double jump triggered")
 		velocity.y = -JUMP_STRENGTH
 		double_jump_count += 1
+		return
+
+	var wall_jump = can_wall_jump and m_is_dragging and is_on_wall()
+	if wall_jump:
+		print("Wall jump triggered")
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var normal = collision.get_normal()
+			if normal.x == 0:
+				continue
+
+			velocity.y = -JUMP_STRENGTH
+			velocity.x = -WALKING_SPEED if normal.x < 0 else WALKING_SPEED
+
+			m_is_dragging = false
+			m_disable_fall = false
+
+		return
 
 func handle_death():
 	m_life=0
@@ -192,10 +223,36 @@ func toggle_current_item():
 
 	current_equipment.equip()
 
+func handle_drag_wall() -> void:
+	# Strangely, the documentation says that
+	# normal.x < 0 is left, but it's actually right
+	# here. I do not know why.
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var normal = collision.get_normal()
+		if normal.x == 0:
+			continue
+
+		var action_pressed = "right" if normal.x < 0 else "left"
+		if Input.is_action_just_pressed(action_pressed):
+			velocity.y = 0
+
+		m_is_dragging = Input.is_action_pressed(action_pressed)
+		if m_is_dragging:
+			velocity.y = WALL_DRAG_FALL_SPEED
+			m_disable_fall = true
+
+		if Input.is_action_just_released(action_pressed):
+			m_is_dragging = false
+			m_disable_fall = false
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fakedeath"):
 		handle_death()
 		return
+
+	if can_wall_grab and is_on_wall() and not is_on_floor():
+		handle_drag_wall()
 
 	if Input.is_action_just_pressed("jump"):
 		handle_jumping(delta)
@@ -209,12 +266,16 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("use_equiped_item"):
 		handle_equiped_item()
 
+
 	handle_crouching()
 
 	calc_horizontal_velocity(delta)
 	apply_animation()
 
-	velocity.y += delta * GRAVITY
+	print(m_disable_fall)
+	if not m_disable_fall:
+		velocity.y += delta * GRAVITY
+
 	move_and_slide()
 
 	if is_on_floor():
