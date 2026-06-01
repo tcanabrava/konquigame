@@ -32,6 +32,28 @@ texture = ExtResource("3_omfyi")
 position = Vector2(-2, 5.842102)
 shape = SubResource("RectangleShape2D_uidou")
 
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1068706081]
+position = Vector2(50, 327)
+scale = Vector2(1, 3.1666667)
+texture = ExtResource("3_omfyi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D3" unique_id=621668199]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D3/StaticBody2D" unique_id=347627633]
+position = Vector2(-2, 5.842102)
+shape = SubResource("RectangleShape2D_uidou")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=267714837]
+position = Vector2(379, 87)
+scale = Vector2(1, 3.1666667)
+texture = ExtResource("3_omfyi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D4" unique_id=59176929]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D4/StaticBody2D" unique_id=787436673]
+position = Vector2(-2, 5.842102)
+shape = SubResource("RectangleShape2D_uidou")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=855489900]
 position = Vector2(604, 98)
 texture = ExtResource("3_t7bhc")
