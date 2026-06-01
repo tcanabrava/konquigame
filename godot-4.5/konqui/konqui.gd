@@ -44,8 +44,10 @@ func set_current_equipment(equipment: EquipableItem):
 	current_equipment = equipment
 
 func _ready() -> void:
-	pass
-
+	profile_scene = PROFILE_SCENE.instantiate()
+	var target_parent = get_tree().root.get_child(0)
+	target_parent.add_child.call_deferred(profile_scene)
+	profile_scene.hide()
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
 
@@ -251,25 +253,7 @@ func handle_drag_wall() -> void:
 			m_is_dragging = false
 			m_disable_fall = false
 
-func handle_profile() -> void:
-	print("Handle profile called")
-	if profile_scene is Node:
-		print("Profile exists, toggling visibility")
-		profile_scene.visible = not profile_scene.visible
-		return
-
-	print("Profile does not exist, instantiating")
-	profile_scene = PROFILE_SCENE.instantiate()
-	get_tree().root.get_child(0).add_child(profile_scene)
-	profile_scene.visible = true
-	return
-
-
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("profile"):
-		handle_profile()
-		return
-
 	if Input.is_action_just_pressed("fakedeath"):
 		handle_death()
 		return

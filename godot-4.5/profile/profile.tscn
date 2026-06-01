@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://gpi8gwa5sddr"]
 
 [ext_resource type="Texture2D" uid="uid://dbg614smctiry" path="res://profile/cyberpunk-profile.png" id="1_apnpl"]
+[ext_resource type="Script" uid="uid://dybf1ij2wxhfp" path="res://profile/profile.gd" id="2_68paa"]
 [ext_resource type="Texture2D" uid="uid://b6d0nvtc3bj47" path="res://profile/default_konqii.png" id="2_uh4y1"]
 [ext_resource type="PackedScene" uid="uid://o5x1y2b02bk8" path="res://profile/item_button.tscn" id="3_v0msp"]
 
 [node name="CyberpunkProfile" type="TextureRect" unique_id=235255877]
+process_mode = 3
 scale = Vector2(0.87239575, 0.8723958)
 texture = ExtResource("1_apnpl")
+script = ExtResource("2_68paa")
 
 [node name="DefaultKonqii" type="TextureRect" parent="." unique_id=2097105972]
+process_mode = 2
 layout_mode = 0
 offset_left = 280.83582
 offset_top = 198.30446
