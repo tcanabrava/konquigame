@@ -78,6 +78,7 @@ position = Vector2(820, 461)
 position = Vector2(8, -139)
 
 [node name="LightsOutTimer" type="Timer" parent="." unique_id=1408287242]
+one_shot = true
 
 [node name="EletronicDoor" parent="." unique_id=520004048 instance=ExtResource("10_vdios")]
 position = Vector2(252.00003, 378)

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://qdywlyykljc6"
+path="res://.godot/imported/lights_out.dialogue-b5bc11a98ac5c4ac6f27bdaa6a468512.tres"
+
+[deps]
+
+source_file="res://scenarios/KonquiOffice/lights_out.dialogue"
+dest_files=["res://.godot/imported/lights_out.dialogue-b5bc11a98ac5c4ac6f27bdaa6a468512.tres"]
+
+[params]
+
+defaults=true
