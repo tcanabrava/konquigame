@@ -10,8 +10,11 @@ class_name Konqui2D
 
 const JUMP_STRENGTH: float = 400.0
 const WALKING_SPEED: float = 300.0
-const RUNNING_SPEED: float = 200.0
+# Extra speed added on top of WALKING_SPEED while the run action is held.
+const RUN_BONUS: float = 200.0
 const WALL_DRAG_FALL_SPEED: float = 20.0
+# Fraction of ground steering applied while airborne (0 = no air control, 1 = full).
+const AIR_CONTROL: float = 0.5
 
 const PROFILE_SCENE: PackedScene = preload("uid://gpi8gwa5sddr")
 var profile_scene: Node = null
@@ -47,15 +50,13 @@ func _ready() -> void:
 	profile_scene = PROFILE_SCENE.instantiate()
 	var target_parent = get_tree().root.get_child(0)
 	target_parent.add_child.call_deferred(profile_scene)
-	profile_scene.hide()
+
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
 
 func calc_horizontal_velocity(delta: float):
-	if not is_on_floor():
-		return
-
-	if m_is_crouched:
+	# Crouching only halts movement while grounded; in the air we keep momentum.
+	if m_is_crouched and is_on_floor():
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
 
@@ -63,19 +64,25 @@ func calc_horizontal_velocity(delta: float):
 	var is_running: bool = Input.is_action_pressed("run")
 
 	if is_zero_approx(input_direction):
-		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
+		# Decelerate on the ground, but preserve momentum while airborne.
+		if is_on_floor():
+			velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
 		return
 
 	m_flip_sprite = input_direction < 0.0
 
 	var next_velocity = WALKING_SPEED
 	if is_running:
-		next_velocity += RUNNING_SPEED
+		next_velocity += RUN_BONUS
 
 	if input_direction < 0.0:
-		next_velocity *= -1;
+		next_velocity *= -1
 
-	velocity.x = next_velocity
+	if is_on_floor():
+		velocity.x = next_velocity
+	else:
+		# Reduced air control: steer toward the target velocity instead of snapping.
+		velocity.x = float(lerp(velocity.x, next_velocity, AIR_CONTROL * 6 * delta))
 	return
 
 func apply_animation() -> void:
@@ -115,8 +122,10 @@ func apply_animation() -> void:
 	if sprite.is_playing() && sprite.animation == "crouch":
 		return
 
-	if  not is_on_floor():
-		if Input.is_action_pressed("jump"): # Jump just started
+	if not is_on_floor():
+		# Show the jump/airborne animation for the whole arc, not just while
+		# the jump key is held.
+		if sprite.animation != "jump":
 			sprite.play("jump")
 		return
 
@@ -177,6 +186,9 @@ func handle_jumping(delta: float):
 
 			m_is_dragging = false
 			m_disable_fall = false
+
+			# One wall contact is enough; avoid double-applying the jump/flip.
+			break
 
 		return
 
