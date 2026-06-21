@@ -4,10 +4,14 @@ class_name FlashlightItem
 
 const FLASHLIGHT = preload("uid://d16b0wggnktl4")
 
+## Power the flashlight burns per second while switched on.
+const POWER_COST_PER_SECOND: float = 10.0
+
 var flashlight_instance: PointLight2D = null
 
 func _init() -> void:
 	flashlight_instance = FLASHLIGHT.instantiate()
+	power_cost_per_second = POWER_COST_PER_SECOND
 
 func equip() -> bool:
 	if not super.equip():

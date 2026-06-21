@@ -16,12 +16,30 @@ const WALL_DRAG_FALL_SPEED: float = 20.0
 # Fraction of ground steering applied while airborne (0 = no air control, 1 = full).
 const AIR_CONTROL: float = 0.5
 
+# Maximum vital stat values. Current values live in the Stat objects below.
+const MAX_HEALTH: float = 100.0
+const MAX_STAMINA: float = 100.0
+const MAX_POWER: float = 100.0
+
+# Resource drain/regen rates, in points per second. Tune freely.
+# Power is *drained* by whatever equipped item is in use (see EquipableItem);
+# Konqui only regenerates it slowly while nothing is drawing on it.
+const STAMINA_RUN_DRAIN: float = 25.0
+const STAMINA_REGEN: float = 15.0
+const POWER_REGEN: float = 1.0
+
 const PROFILE_SCENE: PackedScene = preload("uid://gpi8gwa5sddr")
 var profile_scene: Node = null
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var m_life: int = 1
+# Bounded vital stats observed by the CharacterInformation HUD through their
+# `changed` signal. Created here (at construction) so they exist before any
+# observing HUD's _ready() runs.
+var health := Stat.new(MAX_HEALTH)
+var stamina := Stat.new(MAX_STAMINA)
+var power := Stat.new(MAX_POWER)
+
 var m_is_crouching: bool = false
 var m_is_getting_up: bool = false
 var m_is_crouched: bool = false
@@ -53,8 +71,18 @@ func _ready() -> void:
 
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)
+	if health.is_empty():
+		return
+	health.change_by(-damage)
+	if health.is_empty():
+		handle_death()
 
 func calc_horizontal_velocity(delta: float):
+	# While dragging on a wall, the wall logic owns horizontal velocity; don't
+	# let air control steer the player into/away from the wall.
+	if m_is_dragging:
+		return
+
 	# Crouching only halts movement while grounded; in the air we keep momentum.
 	if m_is_crouched and is_on_floor():
 		velocity.x = float(lerp(velocity.x, 0.0, 6 * delta))
@@ -86,7 +114,7 @@ func calc_horizontal_velocity(delta: float):
 	return
 
 func apply_animation() -> void:
-	if m_life == 0:
+	if health.is_empty():
 		var death_anim = ""
 		var death_animation = randi() % 100
 		if death_animation <= 50:
@@ -193,9 +221,21 @@ func handle_jumping(delta: float):
 		return
 
 func handle_death():
-	m_life=0
+	health.set_current(0.0)
 	apply_animation()
 	set_physics_process(false)
+
+# Drains/regenerates the stamina and power bars. Kept separate from movement so
+# the rates above can be tuned (or this whole behaviour removed) in one place.
+func update_resources(delta: float) -> void:
+	var is_running := is_on_floor() and not is_zero_approx(velocity.x) and Input.is_action_pressed("run")
+	stamina.change_by((-STAMINA_RUN_DRAIN if is_running else STAMINA_REGEN) * delta)
+
+	# The in-use item drains Power itself; here we only regenerate it while no
+	# item is actively consuming it.
+	var is_using_item := current_equipment != null and current_equipment.in_use
+	if not is_using_item:
+		power.change_by(POWER_REGEN * delta)
 
 func handle_crouching() -> bool:
 	m_is_crouching = Input.is_action_just_pressed("down")
@@ -242,36 +282,39 @@ func toggle_current_item():
 
 	current_equipment.equip()
 
-func handle_drag_wall() -> void:
-	# Strangely, the documentation says that
-	# normal.x < 0 is left, but it's actually right
-	# here. I do not know why.
+func update_wall_drag() -> void:
+	# Recompute the drag state from scratch every frame instead of toggling it
+	# on key events. Because the flags start false here and are only switched on
+	# when every precondition currently holds, the state can never get "stuck":
+	# the moment we land, leave the wall, release the key or lose the ability,
+	# it falls back to false on its own.
+	m_is_dragging = false
+	m_disable_fall = false
+
+	if not can_wall_grab or is_on_floor() or not is_on_wall():
+		return
+
+	# Strangely, the documentation says that normal.x < 0 is left, but it's
+	# actually right here. I do not know why.
 	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var normal = collision.get_normal()
+		var normal = get_slide_collision(i).get_normal()
 		if normal.x == 0:
 			continue
 
-		var action_pressed = "right" if normal.x < 0 else "left"
-		if Input.is_action_just_pressed(action_pressed):
-			velocity.y = 0
-
-		m_is_dragging = Input.is_action_pressed(action_pressed)
-		if m_is_dragging:
-			velocity.y = WALL_DRAG_FALL_SPEED
+		var into_wall = "right" if normal.x < 0 else "left"
+		if Input.is_action_pressed(into_wall):
+			m_is_dragging = true
 			m_disable_fall = true
-
-		if Input.is_action_just_released(action_pressed):
-			m_is_dragging = false
-			m_disable_fall = false
+			velocity.y = WALL_DRAG_FALL_SPEED
+		break
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fakedeath"):
 		handle_death()
 		return
 
-	if can_wall_grab and is_on_wall() and not is_on_floor():
-		handle_drag_wall()
+	# Always recompute the wall-drag state so it self-corrects on landing, etc.
+	update_wall_drag()
 
 	if Input.is_action_just_pressed("jump"):
 		handle_jumping(delta)
@@ -289,6 +332,7 @@ func _physics_process(delta: float) -> void:
 	handle_crouching()
 
 	calc_horizontal_velocity(delta)
+	update_resources(delta)
 	apply_animation()
 
 	if not m_disable_fall:

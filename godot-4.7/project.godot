@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Konqui_try_2"
-run/main_scene="uid://b1by66g2a8jx6"
+run/main_scene="uid://flsh7d0ahfin"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
