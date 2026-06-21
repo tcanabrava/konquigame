@@ -12,6 +12,9 @@ var flashlight_instance: PointLight2D = null
 func _init() -> void:
 	flashlight_instance = FLASHLIGHT.instantiate()
 	power_cost_per_second = POWER_COST_PER_SECOND
+	# The light scene defaults to visible; keep it dark until actually switched
+	# on (start_use), so "light on" always matches "in use" / draining power.
+	flashlight_instance.visible = false
 
 func equip() -> bool:
 	if not super.equip():

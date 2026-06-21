@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bq5byqwwng74y"]
 
 [ext_resource type="Script" uid="uid://bsl5k4wtr54o6" path="res://scenarios/KonquiOffice/konqui_office.gd" id="1_ff17r"]
+[ext_resource type="PackedScene" path="res://character_information/character_information.tscn" id="2_4x7t8"]
 [ext_resource type="Texture2D" uid="uid://dct6ejl80lqcf" path="res://original_assets/wall_elements/Flat Center Wall.png" id="2_tvn5h"]
 [ext_resource type="Texture2D" uid="uid://cq4a85xdx2s12" path="res://original_assets/floors/Cyber Floor Center Tile.png" id="3_h8liw"]
 [ext_resource type="Texture2D" uid="uid://cgxkhbjo1ma01" path="res://original_assets/desks/Cyberpunk Desk Asset (1).png" id="4_xesvg"]
@@ -83,3 +84,6 @@ one_shot = true
 [node name="EletronicDoor" parent="." unique_id=520004048 instance=ExtResource("10_vdios")]
 position = Vector2(252.00003, 378)
 scale = Vector2(0.65598357, 0.65598357)
+
+[node name="CharacterInformation" parent="." unique_id=653881179 node_paths=PackedStringArray("character") instance=ExtResource("2_4x7t8")]
+character = NodePath("../Konqui")

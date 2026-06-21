@@ -47,6 +47,11 @@ func unequip() -> bool:
 	if not equiped:
 		return false
 
+	# Switch the item off first so we can never be "in use while unequipped"
+	# (which would resume draining power the moment it's re-equipped).
+	if in_use:
+		stop_use()
+
 	equiped = false
 
 	return true

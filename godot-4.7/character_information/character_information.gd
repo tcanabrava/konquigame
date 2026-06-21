@@ -1,6 +1,9 @@
-extends Control
+extends CanvasLayer
 
 ## On-screen overview of a character's vital stats: health, stamina and power.
+##
+## Root is a [CanvasLayer] so the panel stays fixed to the screen regardless of
+## the [Camera2D] -- a plain Control placed in the world would scroll with it.
 ##
 ## Assign [member character] in the inspector to the [Konqui2D] node this panel
 ## should track. The bars then update automatically via each [Stat]'s
