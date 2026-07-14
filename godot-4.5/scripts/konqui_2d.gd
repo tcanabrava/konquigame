@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name Konqui2D
+class_name Konqui2Dc
 
 const STRAIGTH_FIRE = preload("uid://buku7o8cfxuma")
 
