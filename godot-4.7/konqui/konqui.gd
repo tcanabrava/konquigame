@@ -28,9 +28,6 @@ const STAMINA_RUN_DRAIN: float = 25.0
 const STAMINA_REGEN: float = 15.0
 const POWER_REGEN: float = 1.0
 
-const PROFILE_SCENE: PackedScene = preload("uid://gpi8gwa5sddr")
-var profile_scene: Node = null
-
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Bounded vital stats observed by the CharacterInformation HUD through their
@@ -63,11 +60,6 @@ var double_jump_count: int = 0
 
 func set_current_equipment(equipment: EquipableItem):
 	current_equipment = equipment
-
-func _ready() -> void:
-	profile_scene = PROFILE_SCENE.instantiate()
-	var target_parent = get_tree().root.get_child(0)
-	target_parent.add_child.call_deferred(profile_scene)
 
 func receive_damage(damage: float, type: String):
 	print("Damage received", damage, type)

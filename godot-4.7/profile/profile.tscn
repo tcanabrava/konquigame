@@ -5,13 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://b6d0nvtc3bj47" path="res://profile/default_konqii.png" id="2_uh4y1"]
 [ext_resource type="PackedScene" uid="uid://o5x1y2b02bk8" path="res://profile/item_button.tscn" id="3_v0msp"]
 
-[node name="CyberpunkProfile" type="TextureRect" unique_id=235255877]
+[node name="CyberpunkProfile" type="CanvasLayer"]
 process_mode = 3
-scale = Vector2(0.87239575, 0.8723958)
-texture = ExtResource("1_apnpl")
 script = ExtResource("2_68paa")
 
-[node name="DefaultKonqii" type="TextureRect" parent="." unique_id=2097105972]
+[node name="Background" type="TextureRect" parent="."]
+scale = Vector2(0.87239575, 0.8723958)
+texture = ExtResource("1_apnpl")
+
+[node name="DefaultKonqii" type="TextureRect" parent="Background"]
 process_mode = 2
 layout_mode = 0
 offset_left = 280.83582
@@ -20,7 +22,7 @@ offset_right = 530.8358
 offset_bottom = 615.30444
 texture = ExtResource("2_uh4y1")
 
-[node name="Label" type="Label" parent="." unique_id=127272442]
+[node name="Label" type="Label" parent="Background"]
 layout_mode = 0
 offset_left = 109.75513
 offset_top = 93.99403
@@ -28,7 +30,7 @@ offset_right = 431.85663
 offset_bottom = 197.1582
 text = "Item Description"
 
-[node name="GridContainer" type="GridContainer" parent="." unique_id=1705371145]
+[node name="GridContainer" type="GridContainer" parent="Background"]
 layout_mode = 0
 offset_left = 109.75516
 offset_top = -167.35518
@@ -36,38 +38,38 @@ offset_right = 431.85666
 offset_bottom = 83.67764
 columns = 4
 
-[node name="ItemButton_01" parent="GridContainer" unique_id=318128078 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_01" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_02" parent="GridContainer" unique_id=94268888 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_02" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_03" parent="GridContainer" unique_id=1832693269 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_03" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_04" parent="GridContainer" unique_id=631468167 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_04" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_05" parent="GridContainer" unique_id=933559350 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_05" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_06" parent="GridContainer" unique_id=1947488873 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_06" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_07" parent="GridContainer" unique_id=358535413 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_07" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_08" parent="GridContainer" unique_id=571790772 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_08" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_09" parent="GridContainer" unique_id=1392095555 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_09" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_10" parent="GridContainer" unique_id=2125354148 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_10" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_11" parent="GridContainer" unique_id=2019286802 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_11" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2
 
-[node name="ItemButton_12" parent="GridContainer" unique_id=1037938357 instance=ExtResource("3_v0msp")]
+[node name="ItemButton_12" parent="Background/GridContainer" instance=ExtResource("3_v0msp")]
 layout_mode = 2

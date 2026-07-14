@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bq3kedbk8kg4a" path="res://original_assets/wall_elements/Tokyo Tourist Photo.png" id="8_u8c4k"]
 [ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://konqui/konqui.tscn" id="9_mrh4n"]
 [ext_resource type="PackedScene" uid="uid://vov63msbphpw" path="res://doors/metal_door/metal_door.tscn" id="10_vdios"]
+[ext_resource type="PackedScene" uid="uid://gpi8gwa5sddr" path="res://profile/profile.tscn" id="11_prof"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jlr3k"]
 distance = -3.0
@@ -87,3 +88,5 @@ scale = Vector2(0.65598357, 0.65598357)
 
 [node name="CharacterInformation" parent="." unique_id=653881179 node_paths=PackedStringArray("character") instance=ExtResource("2_4x7t8")]
 character = NodePath("../Konqui")
+
+[node name="Profile" parent="." unique_id=2093599836 instance=ExtResource("11_prof")]
