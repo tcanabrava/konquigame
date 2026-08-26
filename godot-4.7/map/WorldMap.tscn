@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c02hvyhlacrhr"]
+
+[ext_resource type="Texture2D" uid="uid://bl1q8lnxpsjrs" path="res://map/map_motherboard.png" id="1_1edch"]
+[ext_resource type="Texture2D" uid="uid://jda3qoomr1wl" path="res://map/Icons/konqui_office.png" id="2_yjp0r"]
+
+[node name="WorldMap" type="Control" unique_id=1264788731]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MapBackground" type="TextureRect" parent="." unique_id=1408977906]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1edch")
+
+[node name="GPUTown" type="TextureButton" parent="." unique_id=1238747013]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KonquiOffice" type="TextureButton" parent="." unique_id=1303455332]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 567.0
+offset_right = 323.0
+offset_bottom = 631.0
+texture_normal = ExtResource("2_yjp0r")
+ignore_texture_size = true
+stretch_mode = 0

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://roqsp1avoamv" path="res://backgrounds/QuantumTunnel.jpg" id="1_iybd7"]
 [ext_resource type="Script" uid="uid://c28wsxsybr3lb" path="res://tests/test_jump.gd" id="1_nleuf"]
-[ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://konqui/konqui.tscn" id="2_nleuf"]
-[ext_resource type="Texture2D" uid="uid://j8s15lplvcmg" path="res://konqui/shocked/shocked_4.png" id="3_omfyi"]
-[ext_resource type="Texture2D" uid="uid://ckxdkdjiclf46" path="res://scenario/wood_drawer.png" id="3_t7bhc"]
+[ext_resource type="PackedScene" uid="uid://bac6rkgwv0s3l" path="res://characters/konqui/konqui.tscn" id="2_nleuf"]
+[ext_resource type="Texture2D" uid="uid://j8s15lplvcmg" path="res://characters/konqui/shocked/shocked_4.png" id="3_omfyi"]
+[ext_resource type="Texture2D" uid="uid://ckxdkdjiclf46" path="res://scenarios/wood_drawer.png" id="3_t7bhc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uidou"]
 size = Vector2(100, 189.78946)
